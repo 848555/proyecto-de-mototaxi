@@ -1,0 +1,458 @@
+/* Estilos generales */
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: aqua;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    height: 100vh; /* Ocupa toda la altura del viewport */
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 400px; /* Ajusta este valor según tus necesidades */
+    background: rgb(247, 248, 250);
+    border-radius: 30px;
+    line-height: 1.6;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Alinea el contenido al centro */
+}
+
+h1 {
+    color: rgb(12, 212, 102);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+button {
+    background-color: rgb(12, 212, 102);
+    color: #fff;
+    border: none;
+    padding: 12px 24px; /* Aumenta el padding para hacer el botón más grande en móviles */
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0a8c5f;
+}
+
+.messaje {
+    color: rgb(12, 212, 102);
+    background-color: #dff0d8;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px; /* Reducir un poco el tamaño del título en móviles */
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 12px 20px; /* Ajustes adicionales para el botón en móviles */
+        font-size: 16px;
+    }
+}
+
+/* Estilos para la clase "regresar" */
+.regresar {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px; /* Ajustes para el enlace "regresar" en móviles */
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.regresar:hover {
+    background-color: #555;
+}
+
+
+
+/* Estilos para la accesibilidad de todas las paginas */
+
+
+/* Estilos para el menú horizontal */
+.menu-horizontal {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .menu-horizontal > li > a {
+    display: block;
+    padding: 15px 20px;
+    color: black;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Estilos para el botón del menú */
+  .menu {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    right: 20px;
+    top: 20px;
+    z-index: 100;
+  }
+  
+  .menu icon-icon:nth-child(2) {
+    display: none;
+  }
+  
+  /* Estilos para la barra lateral */
+  .barra-lateral {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 15px;
+    background-color: var(--color-barra-lateral);
+    transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+    z-index: 50;
+    -webkit-transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+    -moz-transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+    -ms-transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+    -o-transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+  }
+  
+  .mini-barra-lateral {
+    width: 80px;
+  }
+  
+  .barra-lateral span {
+    width: 100px;
+    white-space: nowrap;
+    font-size: 18px;
+    text-align: left;
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+  }
+  
+  .barra-lateral span.oculto {
+    opacity: 0;
+    width: 0;
+  }
+  
+  /* Estilos para la navegación dentro de la barra lateral */
+  .barra-lateral .navegacion {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .barra-lateral .navegacion::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .barra-lateral .navegacion::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll);
+    border-radius: 5px;
+  }
+  
+  .barra-lateral .navegacion::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-scroll-hover);
+  }
+  
+  .barra-lateral .navegacion li {
+    list-style: none;
+    display: flex;
+    margin-bottom: 5px;
+  }
+  
+  .barra-lateral .navegacion a {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    color: var(--color-texto-menu);
+  }
+  
+  .barra-lateral .navegacion a:hover {
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+  }
+  
+  .barra-lateral .navegacion ion-icon {
+    min-width: 50px;
+    font-size: 20px;
+  }
+  
+  /* Estilos para la línea divisoria en la barra lateral */
+  .barra-lateral .linea {
+    width: 100%;
+    height: 1px;
+    margin-top: 15px;
+    background-color: var(--color-linea);
+  }
+  
+  /* Estilos para el modo oscuro en la barra lateral */
+  .barra-lateral .modo-oscuro {
+    width: 100%;
+    margin-bottom: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .barra-lateral .modo-oscuro .info {
+    width: 150px;
+    height: 45px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: var(--color-texto-menu);
+  }
+  
+  .barra-lateral .modo-oscuro ion-icon {
+    width: 50px;
+    font-size: 20px;
+  }
+  
+  /* Estilos para el switch en la barra lateral */
+  .barra-lateral .modo-oscuro .switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: 45px;
+    cursor: pointer;
+  }
+  
+  .barra-lateral .modo-oscuro .base {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    height: 20px;
+    background-color: var(--color-switch-base);
+    border-radius: 50px;
+  }
+  
+  .barra-lateral .modo-oscuro .circulo {
+    position: absolute;
+    width: 18px;
+    height: 90%;
+    background-color: var(--color-switch-circulo);
+    border-radius: 50%;
+    left: 2px;
+    transition: left 0.5s ease;
+  }
+  
+  /* Estilos para la sección de usuario en la barra lateral */
+  .barra-lateral .usuario {
+    width: 100%;
+    display: flex;
+  }
+  
+  .barra-lateral .usuario img {
+    width: 50px;
+    min-width: 50px;
+    border-radius: 10px;
+  }
+  
+  .barra-lateral .usuario .info-usuario {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-texto);
+    overflow: hidden;
+  }
+  
+  .barra-lateral .usuario .nombre {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+  }
+  
+  .barra-lateral .usuario .nombre {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  
+  .barra-lateral .usuario .email {
+    font-size: 13px;
+  }
+  
+  .barra-lateral .usuario ion-icon {
+    font-size: 20px;
+  }
+  
+  #inbox {
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+  }
+  
+  main {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.5s ease;
+  }
+  
+  main.min-main {
+    margin-left: 80px;
+  }
+  
+  
+  /* Estilos para el ícono de accesibilidad */
+  #accessibility-icon {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #3a6bb3;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  #accessibility-icon i {
+    font-size: 24px;
+  }
+  
+  /* Estilos para los controles de accesibilidad */
+  .accessibility-controls {
+    position: fixed;
+    bottom: 80px; /* Ajusta para que el panel esté sobre el ícono */
+    right: 20px;
+    background-color: #0a0a0a;
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  
+  .accessibility-controls button {
+    display: block;
+    margin-bottom: 20px;
+    background-color: aqua;
+    color: rgb(8, 8, 8);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Evitar que el texto grande y el contraste afecten al diseño */
+  body.large-text * {
+    font-size: inherit; /* Evitar que afecte las imágenes o el diseño */
+  }
+  
+  body.high-contrast img {
+    filter: none; /* Asegurarse de que las imágenes no se vean afectadas */
+  }
+  
+  /* Contraste alto */
+  body.high-contrast, nav.high-contrast, .barra-lateral.high-contrast {
+    background-color: black;
+    color: black;}
+  
+  .high-contrast .navegacion a, 
+  .high-contrast .usuario {
+    color:  rgb(7, 6, 6);}
+    
+  
+  .high-contrast ion-icon {
+    color:  white;}
+  
+  .high-contrast button {
+    background-color: white;
+    color: black;
+  }
+  
+  
+  
+  /* Otros ajustes para asegurar que el contraste esté bien */
+  .high-contrast .modal-content {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Estilos generales del modo oscuro */
+  body.modo-oscuro {
+    background-color: #121212; /* Fondo oscuro */
+    color: #e0e0e0; /* Texto claro */
+  }
+  
+  /* Estilo del menú en modo oscuro */
+  body.modo-oscuro .menu,
+  body.modo-oscuro .barra-lateral {
+    background-color: #1e1e1e; /* Fondo oscuro para menú y barra lateral */
+  }
+  
+  /* Estilo de los íconos en modo oscuro */
+  body.modo-oscuro ion-icon {
+    color: #e0e0e0; /* Color claro para íconos */
+  }
+  
+  /* Estilo del panel de accesibilidad */
+  .modo-oscuro .modo-oscuro .switch .circulo {
+    background-color: #fff; /* Color del círculo en modo oscuro */
+  }
+  
+  /* Estilo del panel de accesibilidad */
+  .modo-oscuro .modo-oscuro {
+    background-color: #1e1e1e; /* Fondo oscuro para el panel */
+    color: #e0e0e0; /* Texto claro */
+  }
+  
+  .modo-oscuro .modo-oscuro .info ion-icon {
+    color: #e0e0e0; /* Color del ícono en el panel de accesibilidad */
+  }
+  
+  .modo-oscuro .modo-oscuro .switch .base {
+    background-color: #333; /* Fondo del interruptor en modo oscuro */
+  }
+  
+  .modo-oscuro .modo-oscuro .switch .circulo {
+    background-color: #e0e0e0; /* Color del círculo del interruptor en modo oscuro */
+  }
+  
+  
+  
+  
