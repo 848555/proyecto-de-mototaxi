@@ -1,7 +1,16 @@
 <?php
 session_start();
 include(__DIR__ . '../../../config/conexion.php');
+include(__DIR__ . '/validar_permiso_directo.php');
 
+// ✅ Obtener ID del admin desde la sesión
+$id_admin = $_SESSION['id_usuario'] ?? 0;
+
+// ✅ Validar permiso: módulo 1 = Gestión de Usuarios, acción 1 = insertar
+if (!tienePermiso($id_admin, 1, 1)) {
+    echo "<script>alert('No tienes permiso para insertar usuarios'); window.location='../pages/principal.php';</script>";
+    exit();
+}
 $nombres = $_POST["nombres"] ?? '';
 $apellidos = $_POST["apellidos"] ?? '';
 $dni = $_POST["dni"] ?? '';
