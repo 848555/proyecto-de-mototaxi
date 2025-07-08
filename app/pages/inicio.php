@@ -1,16 +1,17 @@
 <?php
 // Iniciar la sesión
 session_start();
+include(__DIR__ . '../../../config/conexion.php');
 
-// Definir la variable $user_id desde la sesión
-$user_id = $_SESSION['id_usuario'];
-
-// Verificar si el usuario tiene acceso al contenido de esta página
+// Verificar sesión y rol
 if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
-    // Redireccionar a la página de inicio de sesión si no hay sesión iniciada o el rol no es correcto
     header("Location: ../../../../index.php");
     exit;
 }
+
+$id_usuario = $_SESSION['id_usuario'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -59,13 +60,6 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
                 </a>
             </li>
 
-            <li>
-                <a href="#" id="openModalBtn">
-                    <ion-icon name="paper-plane-outline"></ion-icon>
-                    <span>Mis mensajes</span>
-                </a>
-            </li>
-            
             <li>
                 <a href="/app/pages/documentos_mototaxistas_usu.php">
                     <ion-icon name="newspaper-outline"></ion-icon>
@@ -127,12 +121,6 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
 </div>
 
 <!-- Modales -->
-<div id="mensajeModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div id="mensajesContainer"></div>
-    </div>
-</div>
 
 <div id="eliminarCuentaModal" class="modal">
     <div class="modal-content">
@@ -171,11 +159,14 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
     <input type="text" id="numeroNequi" name="numeroNequi" required>
     <button type="submit">Pagar con Nequi</button>
 </form>
-
-
-     
-
     </div>
+
+
+
+
+
+   
+ 
 
     <div class="contenedor">
 
@@ -185,6 +176,10 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
                 echo '<p class="mensaje">' . $_SESSION['mensaje'] . '</p>';
                 unset($_SESSION['mensaje']);
             } ?>
+<!-- Contenedor donde se insertarán los mensajes AJAX -->
+<div id="mensaje-ajax"></div>
+
+
             <hr>
             <p>¿QUÉ QUIERES HACER HOY?</p>
         </div>
@@ -195,7 +190,7 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
 
         <div class="cliente">
             <a href="/app/pages/solicitud.php" id="ser-cliente">Quiero Ser Cliente</a>
-            <a onclick="mostrarAlerta(event)" href="#" id="ser-mototaxista">Quiero Ser Mototaxista</a>
+            <a onclick="mostrarAlerta(event)" id="ser-mototaxista">Quiero Ser Mototaxista</a>
         </div>
     </div>
 
@@ -212,6 +207,10 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+  var userId = <?= json_encode($_SESSION['id_usuario'] ?? null) ?>;
+</script>
+
     <script src="/app/assets/js/funcionalidad.js"></script>
     <script src="/app/assets/js/script.js"></script>
     <script>
@@ -231,6 +230,24 @@ console.log("ID de usuario:", userId); // Para verificar que el userId esté sie
             error.style.display = 'none';
         }
     }, 5000); // 5000 milisegundos = 5 segundos
+</script>
+
+<script>
+setInterval(function () {
+    fetch('/app/include/ver_mensajes_ajax.php')
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim()) {
+                const contenedor = document.getElementById('mensaje-ajax');
+                contenedor.innerHTML = data;
+
+                // Ocultar después de 5 segundos
+                setTimeout(() => {
+                    contenedor.innerHTML = '';
+                }, 5000);
+            }
+        });
+}, 5000);
 </script>
 
 </body>
