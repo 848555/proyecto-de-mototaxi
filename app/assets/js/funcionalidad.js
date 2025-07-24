@@ -1,46 +1,77 @@
-// Obtener elementos del DOM para el modal de mensajes
-var modal = document.getElementById('mensajeModal');
-var openModalBtn = document.getElementById('openModalBtn');
-var closeModal = document.getElementsByClassName('close')[0];
-var mensajesContainer = document.getElementById('mensajesContainer');
+document.addEventListener('DOMContentLoaded', function () {
+    const eliminarCuentaLink = document.getElementById('eliminarCuentaLink');
+    const politicasLink = document.getElementById('politicasLink');
+    const eliminarCuentaModal = document.getElementById('eliminarCuentaModal');
+    const politicasModal = document.getElementById('politicasModal');
 
-// Función para marcar mensajes como leídos
-function marcarMensajesLeidos() {
-    var mensajes = document.querySelectorAll('.mensaje');
-    mensajes.forEach(function(mensaje) {
-        mensaje.classList.add('leido'); // Añadir clase 'leido' a cada mensaje
+    // Abrir modal de eliminar cuenta
+    if (eliminarCuentaLink && eliminarCuentaModal) {
+        eliminarCuentaLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            eliminarCuentaModal.style.display = 'block';
+        });
+    }
+
+    // Abrir modal de políticas
+    if (politicasLink && politicasModal) {
+        politicasLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            politicasModal.style.display = 'block';
+        });
+    }
+
+    // Cerrar modales al hacer clic fuera de ellos
+    window.addEventListener('click', function (event) {
+        if (event.target === eliminarCuentaModal) {
+            eliminarCuentaModal.style.display = 'none';
+        }
+        if (event.target === politicasModal) {
+            politicasModal.style.display = 'none';
+        }
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
     });
+
+    // ✅ Código del modal de mensajes corregido y movido aquí
+    var modal = document.getElementById('mensajeModal');
+    var openModalBtn = document.getElementById('openModalBtn');
+    var closeModal = document.getElementsByClassName('close')[0];
+    var mensajesContainer = document.getElementById('mensajesContainer');
+
+    if (openModalBtn) {
+        openModalBtn.onclick = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        mensajesContainer.innerHTML = xhr.responseText;
+                        modal.style.display = 'block';
+                        marcarMensajesLeidos();
+                    } else {
+                        alert('Hubo un problema al cargar los mensajes.');
+                    }
+                }
+            };
+            xhr.open('GET', '/app/include/mostrar_mensajes.php', true);
+            xhr.send();
+        };
+    }
+
+    if (closeModal) {
+        closeModal.onclick = function () {
+            modal.style.display = 'none';
+        };
+    }
+});
+
+function marcarMensajesLeidos() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/app/include/marcar_mensajes_leidos.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send();
 }
 
-// Abrir modal y cargar mensajes mediante AJAX
-openModalBtn.onclick = function() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                mensajesContainer.innerHTML = xhr.responseText; // Insertar mensajes en el contenedor
-                modal.style.display = 'block'; // Mostrar modal
-                marcarMensajesLeidos(); // Marcar mensajes como leídos
-            } else {
-                alert('Hubo un problema al cargar los mensajes.');
-            }
-        }
-    };
-    xhr.open('GET', '/app/include/mostrar_mensajes.php', true); // Solicitar mensajes
-    xhr.send();
-};
-
-// Cerrar modal cuando se hace clic en la 'X'
-closeModal.onclick = function() {
-    modal.style.display = 'none';
-};
-
-// Cerrar modal cuando se hace clic fuera del modal
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-};
 
 // funcion ajax para verificar los documentos y regirigir 
 function mostrarAlerta(event) {
@@ -149,52 +180,5 @@ setTimeout(function() {
     }
 }, 5000);
 
-// Modal de pago de servicios
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('modalPago');
-    var contenidoModal = document.getElementById('contenidoModal');
-    var spanCerrar = modal.querySelector('.close');
 
-    // Función para abrir el modal
-    function abrirModal() {
-        modal.style.display = 'block';
-    }
 
-    // Función para cerrar el modal
-    function cerrarModal() {
-        modal.style.display = 'none';
-    }
-
-    spanCerrar.addEventListener('click', cerrarModal);
-
-    // Evento para abrir modal al hacer clic en "Pagar servicios"
-    document.getElementById('pagaservicios').addEventListener('click', function(e) {
-        e.preventDefault();
-        contenidoModal.innerHTML = ''; // Limpiar contenido previo
-
-        // Mostrar formulario de Nequi
-        contenidoModal.innerHTML = '<form id="formularioNequi">' +
-            '<label for="numeroNequi">Número de cuenta Nequi:</label>' +
-            '<input type="text" id="numeroNequi" name="numeroNequi" required>' +
-            '<button type="button" id="btnPagarNequi">Pagar con Nequi</button>' +
-            '</form>';
-        abrirModal();
-    });
-
-    // Evento para manejar el pago con Nequi
-    document.getElementById('contenidoModal').addEventListener('click', function(e) {
-        if (e.target && e.target.id == 'btnPagarNequi') {
-            var numeroNequi = document.getElementById('numeroNequi').value.trim();
-
-            // Validar el número de cuenta Nequi
-            if (numeroNequi.length < 10) {
-                alert('Por favor ingresa un número de cuenta Nequi válido.');
-                return;
-            }
-
-            // Redirigir a Nequi con el número de cuenta
-            var urlNequi = 'https://www.nequi.com.co/?numero=' + encodeURIComponent(numeroNequi);
-            window.location.href = urlNequi;
-        }
-    });
-});
