@@ -68,13 +68,14 @@ $id_usuario = $_SESSION['id_usuario'];
             </li>
             
             <li class="dropdown">
+   <li class="dropdown">
     <a href="#" id="pagos">
         <ion-icon name="wallet-outline"></ion-icon>
         <span>Pagos</span>
     </a>
     <ul class="dropdown-content">
-        <li><a href="#" id="pagaservicios">Pagar servicios</a></li>
-        <li><a href="/app/pages/pagar_retenciones.php">Pagar tarifa</a></li>
+        <li><a href="/app/pages/pagar_servicio_mototaxista.php" id="pagarServicioMototaxista">Pagar al mototaxista</a></li>
+        <li><a href="/app/pages/pagar_retencion_app.php" id="pagarUsoApp">Pagar uso de la aplicación</a></li>
     </ul>
 </li>
 
@@ -146,27 +147,8 @@ $id_usuario = $_SESSION['id_usuario'];
     </div>
 </div>
 
-<div id="modalPago" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div id="contenidoModal"></div>
-    </div>
-</div>
-
-<!-- Formulario de Nequi -->
-<form id="formularioNequi" style="display: none;">
-    <label for="numeroNequi">Número de cuenta Nequi:</label>
-    <input type="text" id="numeroNequi" name="numeroNequi" required>
-    <button type="submit">Pagar con Nequi</button>
-</form>
-    </div>
 
 
-
-
-
-   
- 
 
     <div class="contenedor">
 
@@ -213,23 +195,21 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <script src="/app/assets/js/funcionalidad.js"></script>
     <script src="/app/assets/js/script.js"></script>
-    <script>
-// Definir el userId en el script para que esté disponible en JavaScript
-var userId = "<?php echo $user_id; ?>"; // Asegúrate de que la variable $user_id esté correctamente definida en PHP
-console.log("ID de usuario:", userId); // Para verificar que el userId esté siendo pasado correctamente
-</script>
+    
 <script>
     // Esperar 5 segundos y luego ocultar los mensajes
     setTimeout(function() {
-        var mensaje = document.querySelector('.mensaje');        
-        if (mensaje) {
-            mensaje.style.display = 'none';
-        }
-        
-        if (error) {
-            error.style.display = 'none';
-        }
-    }, 5000); // 5000 milisegundos = 5 segundos
+    var mensaje = document.querySelector('.mensaje');        
+    if (mensaje) {
+        mensaje.style.display = 'none';
+    }
+
+    var error = document.querySelector('.error-message'); // ✅ define error
+    if (error) {
+        error.style.display = 'none';
+    }
+}, 5000);
+ // 5000 milisegundos = 5 segundos
 </script>
 
 <script>
