@@ -1,55 +1,51 @@
 /* Estilos generales */
 body {
-    font-family: 'Outfit', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: aqua;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    height: 100vh; /* Ocupa toda la altura del viewport */
+ 
+}
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 50px auto;
 }
 
-.contenedor {
-    width: 90%;
-    max-width: 400px; /* Ajusta este valor según tus necesidades */
-    background: rgb(247, 248, 250);
-    border-radius: 30px;
-    line-height: 1.6;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Alinea el contenido al centro */
+h2 {
+  font-weight: bold;
+  color: #333333;
 }
 
-h1 {
-    color: rgb(12, 212, 102);
-    font-size: 24px;
-    margin-bottom: 20px;
+.table {
+  margin-top: 20px;
 }
 
-p {
-    color: #333;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-form {
-    margin-top: 20px;
-}
-
-button {
-    background-color: rgb(12, 212, 102);
-    color: #fff;
-    border: none;
-    padding: 12px 24px; /* Aumenta el padding para hacer el botón más grande en móviles */
-    font-size: 18px;
+.btn-success {
+ padding: 10px 40px;
+    border: 2px solid #007BFF; /* Borde azul */
+    font-size: 14px;
+    background: #007BFF; /* Color de fondo azul para que siempre sea visible */
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 4px;
+    outline: none;
+    transition: all 300ms ease-in-out;
+    color: white; /* Texto blanco para que contraste con el fondo azul */
+    border-radius: 5px;
+    display: inline-block; /* Para asegurarse de que respeta el tamaño del contenido */
+    text-decoration: none;
 }
 
-button:hover {
-    background-color: #0a8c5f;
+.btn-success:hover {
+   background: white; /* Cambia a blanco al pasar el cursor */
+    color: #007BFF; /* Texto azul en hover */
+    border: 2px solid #007BFF; /* Mantiene el borde azul */
+}
+.botones-container {
+  display: flex;
+  justify-content: flex-start; /* o start si usas Bootstrap 5 */
+  gap: 15px;
 }
 
 .messaje {
