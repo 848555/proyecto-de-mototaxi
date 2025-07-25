@@ -1,5 +1,6 @@
 <?php
 session_start();
+include(__DIR__ . '../../../config/conexion.php');
 
 // Verificar si el usuario tiene acceso al contenido de esta página
 if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] != 2) {
@@ -24,6 +25,11 @@ $user_id = $_SESSION['id_usuario'];
 <body>
 
     <div class="contenedor">
+        <div class="estado-en-linea">
+    <button id="toggleOnlineBtn" class="boton-estado">Conectarse</button>
+    <p id="estadoTexto">Estado: Desconectado</p>
+</div>
+
         <form id="verSolicitudes" action="/app/include/aceptar_solicitud.php" method="post">
         <a href="/app/pages/inicio.php?id_usuario=<?php echo $_SESSION['id_usuario']; ?>&uid=<?php echo uniqid(); ?>">
         <img src="/app/assets/imagenes/images.png" alt="" class="retroceder">
@@ -282,5 +288,22 @@ function closeTerminarServicioModal() {
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/app/assets/js/script.js"></script>
+<script src="/app/assets/js/funcionalidad.js"></script>
+<script>
+function escucharAsignaciones() {
+    fetch('/app/include/asignar_solicitudes.php')
+    .then(res => res.json())
+    .then(data => {
+        if (data.asignada && data.id_usuario == <?php echo $user_id; ?>) {
+            if (confirm(`Tienes una solicitud de ${data.solicitud.origen} a ${data.solicitud.destino}. ¿Aceptar?`)) {
+                window.location.href = `/app/include/aceptar_solicitud.php?id_solicitud=${data.solicitud.id_solicitud}&id_usuario=${data.solicitud.id_usuarios}`;
+            }
+        }
+    })
+    .catch(console.error);
+}
+
+setInterval(escucharAsignaciones, 10000); // cada 10 segundos
+</script>
 
 </html>

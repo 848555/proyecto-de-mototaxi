@@ -51,7 +51,7 @@ $stmt_insert = $conexion->prepare($insertQuery);
 $stmt_insert->bind_param("sssisiid", $origen, $destino, $cantidad_personas, $cantidad_motos, $metodo_pago, $id_usuario, $costo_total, $retencion_total);
 
 if ($stmt_insert->execute()) {
-    $_SESSION['success_message'] = "Solicitud realizada con éxito. Costo total: $costo_total. Retención total: $retencion_total.";
+    $_SESSION['success_message'] = "Solicitud realizada con éxito. Costo total: $costo_total.";
 } else {
     $_SESSION['error_message'] = "Hubo un error al realizar la solicitud. Por favor, inténtalo de nuevo.";
 }

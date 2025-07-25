@@ -290,3 +290,11 @@ CREATE TABLE `mensajes_temporales` (
 -- FIN DE SCRIPT
 -- --------------------------------------------------------
 SET FOREIGN_KEY_CHECKS=1;
+--(se crea nueva tabla para la signacion de servicios automaticos)
+CREATE TABLE mototaxistas_en_linea (
+    id_usuario INT PRIMARY KEY,
+    prioridad INT NOT NULL,
+    en_servicio BOOLEAN DEFAULT FALSE,
+    en_linea BOOLEAN DEFAULT TRUE,
+    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

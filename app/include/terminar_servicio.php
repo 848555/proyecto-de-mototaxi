@@ -19,15 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Definir el nuevo valor de pago_completo y estado
     if ($pago_completo == 1 && $cliente_ausente == 0) {
-        $nuevo_pago_completo = 1; // Pagado (en lugar de 'pagado')
-        $nuevo_estado = 'completada'; // Estado válido según la tabla
-        $monto_total = 4000.00; // Monto total sin formato
-        $retencion = 1000.00; // Retención sin formato
+        $nuevo_pago_completo = 1; // Pagado
+        $nuevo_estado = 'completada';
+        $monto_total = 4000.00;
+        $retencion = 1000.00;
     } elseif ($cliente_ausente == 1) {
-        $nuevo_pago_completo = 2; // Cliente ausente (en lugar de 'cliente ausente')
-        $nuevo_estado = 'cancelada'; // Estado válido según la tabla
-        $monto_total = 0.00; // No hay pago
-        $retencion = 0.00; // No hay retención
+        $nuevo_pago_completo = 2; // Cliente ausente
+        $nuevo_estado = 'cancelada';
+        $monto_total = 0.00;
+        $retencion = 0.00;
     } else {
         $_SESSION['error_message'] = 'Estado de pago no válido.';
         header('Location: ../pages/sermototaxista.php');
@@ -46,6 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
+                // ✅ Marcar al mototaxista como disponible nuevamente
+                $conexion->query("UPDATE mototaxistas_en_linea SET en_servicio = 0 WHERE id_usuario = $id_usuario");
+
                 // Insertar la retención si aplica
                 if ($retencion > 0) {
                     $sql_insert_retencion = "INSERT INTO retenciones (id_usuarios, monto, retencion, fecha, pagado, id_solicitud) 

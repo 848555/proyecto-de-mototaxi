@@ -119,7 +119,40 @@ h1 {
     display: inline-block; /* Para asegurarse de que respeta el tamaño del contenido */
      text-decoration: none;
 }
+/*btn conectarse*/
+.estado-en-linea {
+  display: flex;
+  flex-direction: column; /* Coloca elementos uno debajo del otro */
+  align-items: flex-end;  /* Alinea todo hacia la derecha */
+  gap: 5px;               /* Espacio entre el botón y el texto */
+}
 
+.boton-estado {
+ padding: 8px 16px;
+    border: 2px solid #007BFF; /* Borde azul */
+    margin-top: 10px;
+    font-size: 14px;
+    background: #007BFF; /* Color de fondo azul para que siempre sea visible */
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 300ms ease-in-out;
+    color: white; /* Texto blanco para que contraste con el fondo azul */
+    border-radius: 5px;
+    display: inline-block; /* Para asegurarse de que respeta el tamaño del contenido */
+     text-decoration: none;
+}
+
+.boton-estado:hover {
+   background: white; /* Cambia a blanco al pasar el cursor */
+    color: #007BFF; /* Texto azul en hover */
+    border: 2px solid #007BFF; /* Mantiene el borde azul */
+}
+
+#estadoTexto {
+  margin: 0;
+  font-weight: bold;
+}
 .solicitud a:hover {
    background: white; /* Cambia a blanco al pasar el cursor */
     color: #007BFF; /* Texto azul en hover */

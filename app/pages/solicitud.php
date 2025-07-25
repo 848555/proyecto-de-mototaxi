@@ -88,7 +88,7 @@ $solicitudes_pendientes = $result->fetch_all(MYSQLI_ASSOC);
             <option value="efectivo">Efectivo</option>
             <option value="tarjeta">Nequi</option>
         </select>
-        <a href="/app/pages/inicio.php">Cancelar</a>
+        <a href="/app/pages/inicio.php">Regresar</a>
         <button>Solicitar Mototaxi</button>
     </form>
 

@@ -181,4 +181,28 @@ setTimeout(function() {
 }, 5000);
 
 
+// conectarse mototaxistas 
+// Al cargar la página, consulta el estado actual
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('/app/include/consultar_estado.php')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('estadoTexto').textContent = "Estado: " + (data.en_linea ? "Conectado" : "Desconectado");
+            document.getElementById('toggleOnlineBtn').textContent = data.en_linea ? "Desconectarse" : "Conectarse";
+        });
+});
+
+// Al hacer clic, se cambia el estado
+document.getElementById('toggleOnlineBtn').addEventListener('click', () => {
+    fetch('/app/include/toggle_estado.php', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('estadoTexto').textContent = "Estado: " + (data.en_linea ? "Conectado" : "Desconectado");
+        document.getElementById('toggleOnlineBtn').textContent = data.en_linea ? "Desconectarse" : "Conectarse";
+    });
+});
+
+
 
